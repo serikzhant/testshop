@@ -1,0 +1,4 @@
+You are almost there, {{ user.username }}
+Please confirm your email address to complete the registration
+{{ link }}" Confirm Email
+Token expires on {{ expiry|time:"TIME_FORMAT" }}
