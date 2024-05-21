@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     "crispy_bootstrap5",
     'django_email_verification',
+    'django_google_fonts',
+    'sorl.thumbnail',
 
     # Apps
     'shop.apps.ShopConfig',
@@ -49,7 +51,7 @@ ROOT_URLCONF = 'src.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'src' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -102,6 +104,10 @@ USE_TZ = True
 # Project External Settings
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'static'
+STATICFILES_DIRS = [
+    BASE_DIR / 'src' / 'static'
+]
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
@@ -160,3 +166,17 @@ EMAIL_HOST_USER = 'iamsikowa7@gmail.com'
 # os.environ['password_key'] suggested
 EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
+
+# Stripe
+STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
+STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
+STRIPE_API_VERSION = env('STRIPE_API_VERSION')
+
+# Yookassa
+YOOKASSA_SHOP_ID = env('YOOKASSA_SHOP_ID')
+YOOKASSA_SECRET_KEY = env('YOOKASSA_SECRET_KEY')
+# YOOKASSA_WEBHOOK_PASSWORD = env('YOOKASSA_WEBHOOK_PASSWORD')
+
+
+GOOGLE_FONTS = ['Montserrat:wght@300,400,500', 'Roboto']
+GOOGLE_FONTS_DIR = BASE_DIR / 'static'
