@@ -28,6 +28,8 @@ INSTALLED_APPS = [
     'django_email_verification',
     'django_google_fonts',
     'sorl.thumbnail',
+    'django_celery_beat',
+    'django_celery_results',
 
     # Apps
     'shop.apps.ShopConfig',
@@ -171,6 +173,7 @@ EMAIL_USE_TLS = True
 STRIPE_PUBLISHABLE_KEY = env('STRIPE_PUBLISHABLE_KEY')
 STRIPE_SECRET_KEY = env('STRIPE_SECRET_KEY')
 STRIPE_API_VERSION = env('STRIPE_API_VERSION')
+STRIPE_WEBHOOK_SECRET = env('STRIPE_WEBHOOK_SECRET')
 
 # Yookassa
 YOOKASSA_SHOP_ID = env('YOOKASSA_SHOP_ID')
@@ -180,3 +183,18 @@ YOOKASSA_SECRET_KEY = env('YOOKASSA_SECRET_KEY')
 
 GOOGLE_FONTS = ['Montserrat:wght@300,400,500', 'Roboto']
 GOOGLE_FONTS_DIR = BASE_DIR / 'static'
+
+
+# Celery
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_RESULT_EXTENDED = True
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
+
+# CELERY_BEAT_SCHEDULE = {
+#     'check_payment': {
+#         'task': 'payment.tasks.check_payment',
+#         'schedule': crontab(minute='*/1'),
+#     },
+# }
