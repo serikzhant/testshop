@@ -7,7 +7,7 @@
         <img
           class="img-fluid mx-auto d-block"
           alt="Responsive image"
-          src="{{product.image.url}}"
+          src="{{product.full_image_url}}"
         />
         <!-- Product image -->
       </div>
@@ -27,10 +27,21 @@
           <div class="col border-bottom">
             <div class="row p-3">
               <div class="col-6">Price</div>
-
+              {% if product.discount %}
+              <div class="col-6 text-end">
+                <span class="text-decoration-line-through fw-bold text-danger"
+                  >$ {{product.price}}
+                  <span class="badge rounded-pill bg-info">discount</span></span
+                >
+                <span class="h4 fw-bold"
+                  >$ {{product.get_discounted_price}}</span
+                >
+              </div>
+              {% else%}
               <div class="col-6 text-end">
                 <span class="h4 fw-bold">$ {{product.price}}</span>
               </div>
+              {% endif %}
             </div>
           </div>
 
@@ -70,6 +81,8 @@
   </main>
 
   <br />
+
+  {% include "recommend/recommendation.html" %}
 </div>
 
 <script>
@@ -89,8 +102,8 @@
         document.getElementById("lblCartCount").textContent = response.qty;
         const add_button = document.getElementById("add-button");
         add_button.disabled = true;
-        add_button.innerText = "Added to cart"
-        add_button.className = "btn btn-success btn-sm"
+        add_button.innerText = "Added to cart";
+        add_button.className = "btn btn-success btn-sm";
       },
       error: function (error, status) {
         console.log(error);
